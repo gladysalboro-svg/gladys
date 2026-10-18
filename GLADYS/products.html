@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Chickens - Gladys Poultry Farm</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <div class="container navbar">
+      <div class="logo">
+        <span>&#128047;</span>
+        Gladys Poultry Farm
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="categories.html">Categories</a></li>
+          <li><a href="products.html" style="color:var(--primary)">Products</a></li>
+          <li><a href="admin.html">Admin</a></li>
+          <li><a href="index.html#contact" class="btn btn-outline btn-sm">Contact</a></li>
+        </ul>
+        <button id="cart-btn" class="cart-icon" aria-label="Shopping Cart">&#128722;<span class="cart-count">0</span></button>
+        <button class="mobile-menu-btn" aria-label="Menu">&#9776;</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Product Listings -->
+  <section class="products-section">
+    <div class="container">
+      <h2 class="section-title">Available Chickens</h2>
+      <p class="section-subtitle">Prices in Philippine Pesos (&#8369;). Each listing includes breed, age, and availability.</p>
+
+      <div class="filters">
+        <button class="filter-btn active" data-category="">All</button>
+        <button class="filter-btn" data-category="4-month">4 Months (&#8369;100-200)</button>
+        <button class="filter-btn" data-category="5-month">5 Months (&#8369;250-350)</button>
+        <button class="filter-btn" data-category="6-month-plus">6 Months &amp; Older (&#8369;400-500)</button>
+      </div>
+
+      <div class="products-grid" id="products-grid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2026 Gladys Poultry Farm. All rights reserved.</p>
+      <p>Email: gladys_alboro@sjp2cd.edu.ph | Phone: 09988747646</p>
+    </div>
+  </footer>
+
+  <!-- Cart Modal -->
+  <div class="cart-modal-overlay">
+    <div class="cart-modal">
+      <div class="cart-modal-header">
+        <h2>Shopping Cart</h2>
+        <button class="close-modal" id="close-cart-modal">&times;</button>
+      </div>
+      <div class="cart-items"></div>
+      <div class="cart-modal-footer">
+        <div class="cart-total">Total: <span class="cart-total-amount">&#8369;0</span></div>
+        <button class="btn">Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="cart-notification"></div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

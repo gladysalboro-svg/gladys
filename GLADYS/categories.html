@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chicken Categories - Gladys Poultry Farm</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <div class="container navbar">
+      <div class="logo">
+        <span>&#128047;</span>
+        Gladys Poultry Farm
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="categories.html" style="color:var(--primary)">Categories</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="admin.html">Admin</a></li>
+          <li><a href="index.html#contact" class="btn btn-outline btn-sm">Contact</a></li>
+        </ul>
+        <button id="cart-btn" class="cart-icon" aria-label="Shopping Cart">&#128722;<span class="cart-count">0</span></button>
+        <button class="mobile-menu-btn" aria-label="Menu">&#9776;</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section class="hero" style="background: linear-gradient(rgba(29, 53, 87, 0.85), rgba(29, 53, 87, 0.85)); padding: 80px 20px;">
+    <div class="container">
+      <h1>Shop by Chicken Age</h1>
+      <p>Choose the right age group for your farm or backyard flock.</p>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="categories-section">
+    <div class="container">
+      <div class="category-grid">
+        <a href="products.html?cat=4-month" class="category-card">
+          <img src="images/cat-4mo.png" alt="4-month-old chickens" onerror="handleImageError(this)">
+          <div class="overlay">
+            <h3>4-Month-Old Chickens</h3>
+            <p>&#8369;100 - &#8369;200</p>
+            <p style="margin-top:0.5rem;opacity:0.8">Young pullets, not yet laying</p>
+          </div>
+        </a>
+        <a href="products.html?cat=5-month" class="category-card">
+          <img src="images/cat-5mo.jpg" alt="5-month-old chickens" onerror="handleImageError(this)">
+          <div class="overlay">
+            <h3>5-Month-Old Chickens</h3>
+            <p>&#8369;250 - &#8369;350</p>
+            <p style="margin-top:0.5rem;opacity:0.8">Approaching laying age</p>
+          </div>
+        </a>
+        <a href="products.html?cat=6-month-plus" class="category-card">
+          <img src="images/cat-6mo.jpg" alt="6-month-old and older chickens" onerror="handleImageError(this)">
+          <div class="overlay">
+            <h3>6 Months &amp; Older</h3>
+            <p>&#8369;400 - &#8369;500</p>
+            <p style="margin-top:0.5rem;opacity:0.8">Mature hens, laying eggs</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2026 Gladys Poultry Farm. All rights reserved.</p>
+      <p>Email: gladys_alboro@sjp2cd.edu.ph | Phone: 09988747646</p>
+    </div>
+  </footer>
+
+  <!-- Cart Modal -->
+  <div class="cart-modal-overlay">
+    <div class="cart-modal">
+      <div class="cart-modal-header">
+        <h2>Shopping Cart</h2>
+        <button class="close-modal" id="close-cart-modal">&times;</button>
+      </div>
+      <div class="cart-items"></div>
+      <div class="cart-modal-footer">
+        <div class="cart-total">Total: <span class="cart-total-amount">&#8369;0</span></div>
+        <button class="btn">Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="cart-notification"></div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

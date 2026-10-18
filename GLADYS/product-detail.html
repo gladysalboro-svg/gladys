@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chicken Details - Gladys Poultry Farm</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <div class="container navbar">
+      <div class="logo">
+        <span>&#128047;</span>
+        Gladys Poultry Farm
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="categories.html">Categories</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="admin.html">Admin</a></li>
+          <li><a href="index.html#contact" class="btn btn-outline btn-sm">Contact</a></li>
+        </ul>
+        <button id="cart-btn" class="cart-icon" aria-label="Shopping Cart">&#128722;<span class="cart-count">0</span></button>
+        <button class="mobile-menu-btn" aria-label="Menu">&#9776;</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Product Detail -->
+  <section class="product-detail-section">
+    <div class="container">
+      <a href="products.html" class="btn btn-outline btn-sm" style="margin-bottom:2rem;display:inline-block;">&#8592; Back to Products</a>
+
+      <div class="product-detail-grid">
+        <div class="product-main-image">
+          <!-- Image populated by JS -->
+        </div>
+        <div class="product-info">
+          <h1 id="detail-name"></h1>
+          <div class="product-meta" id="detail-meta"></div>
+          <p class="product-description" id="detail-description"></p>
+
+          <div class="product-characteristics">
+            <h4>Characteristics</h4>
+            <ul id="detail-characteristics"></ul>
+          </div>
+
+          <div class="product-price" id="detail-price"></div>
+          <div class="product-availability" id="detail-availability"></div>
+
+          <div class="quantity-selector">
+            <label for="detail-qty">Quantity</label>
+            <input type="number" id="detail-qty" value="1" min="1">
+          </div>
+          <button class="btn add-to-cart" id="detail-add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2026 Gladys Poultry Farm. All rights reserved.</p>
+      <p>Email: gladys_alboro@sjp2cd.edu.ph | Phone: 09988747646</p>
+    </div>
+  </footer>
+
+  <!-- Cart Modal -->
+  <div class="cart-modal-overlay">
+    <div class="cart-modal">
+      <div class="cart-modal-header">
+        <h2>Shopping Cart</h2>
+        <button class="close-modal" id="close-cart-modal">&times;</button>
+      </div>
+      <div class="cart-items"></div>
+      <div class="cart-modal-footer">
+        <div class="cart-total">Total: <span class="cart-total-amount">&#8369;0</span></div>
+        <button class="btn">Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="cart-notification"></div>
+
+  <script src="js/script.js"></script>
+  <script>
+    // Override addToCart to respect quantity selector on detail page
+    const originalAddToCart = window.addToCart;
+    window.addToCart = function (id) {
+      const product = products.find(p => p.id === id);
+      if (!product || product.availability === 'unavailable') return;
+      const qtyInput = document.getElementById("detail-qty");
+      const qty = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
+      const existing = cart.find(item => item.id === id);
+      if (existing) {
+        existing.quantity += qty;
+      } else {
+        cart.push({ ...product, quantity: qty });
+      }
+      saveCart();
+      showNotification(qty + " x " + product.name + " added to cart!");
+    };
+
+    // Update detail add-to-cart with quantity
+    document.addEventListener("DOMContentLoaded", function () {
+      const btn = document.getElementById("detail-add-to-cart");
+      if (btn) {
+        const params = new URLSearchParams(window.location.search);
+        const id = parseInt(params.get("id"));
+        btn.onclick = () => window.addToCart(id);
+      }
+    });
+  </script>
+</body>
+</html>

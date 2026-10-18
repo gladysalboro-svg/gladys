@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gladys Poultry Farm - Fresh Chickens for Sale</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <div class="container navbar">
+      <div class="logo">
+        <span>&#128047;</span>
+        Gladys Poultry Farm
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="categories.html">Categories</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="admin.html">Admin</a></li>
+          <li><a href="index.html#contact" class="btn btn-outline btn-sm">Contact</a></li>
+        </ul>
+        <button id="cart-btn" class="cart-icon" aria-label="Shopping Cart">&#128722;<span class="cart-count">0</span></button>
+        <button class="mobile-menu-btn" aria-label="Menu">&#9776;</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>Fresh, Healthy Chickens<br>From Our Farm to Your Backyard</h1>
+      <p>Quality poultry raised with care. Browse our selection of 4-month, 5-month, and 6-month+ chickens at affordable peso prices.</p>
+      <a href="products.html" class="btn">Shop Chickens</a>
+    </div>
+  </section>
+
+  <!-- Featured Chickens -->
+  <section class="featured">
+    <div class="container">
+      <h2 class="section-title">Featured Chickens</h2>
+      <p class="section-subtitle">Our most popular picks ready for your farm or backyard.</p>
+      <div class="featured-grid" id="featured-grid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Preview -->
+  <section class="categories-section">
+    <div class="container">
+      <h2 class="section-title">Shop by Age</h2>
+      <div class="category-grid">
+        <a href="categories.html" class="category-card">
+          <img src="images/cat-4mo.png" alt="4-month-old chickens" onerror="handleImageError(this)">
+          <div class="overlay">
+            <h3>4-Month-Old Chickens</h3>
+            <p>&#8369;100 - &#8369;200</p>
+          </div>
+        </a>
+        <a href="categories.html" class="category-card">
+          <img src="images/cat-5mo.jpg" alt="5-month-old chickens" onerror="handleImageError(this)">
+          <div class="overlay">
+            <h3>5-Month-Old Chickens</h3>
+            <p>&#8369;250 - &#8369;350</p>
+          </div>
+        </a>
+        <a href="categories.html" class="category-card">
+          <img src="images/cat-6mo.jpg" alt="6-month-old and older chickens" onerror="handleImageError(this)">
+          <div class="overlay">
+            <h3>6 Months &amp; Older</h3>
+            <p>&#8369;400 - &#8369;500</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section" id="contact">
+    <div class="contact-container">
+      <div class="contact-info">
+        <h3>Contact Us</h3>
+        <p><strong>Email:</strong> gladys_alboro@sjp2cd.edu.ph</p>
+        <p><strong>Phone:</strong> 09988747646</p>
+        <p><strong>Location:</strong> San Juan, Philippines</p>
+        <p>Visit us or message us for inquiries and orders.</p>
+      </div>
+      <div class="contact-map">
+        <h3>Our Farm Location</h3>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3836.5!2d121.023!3d14.6!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDI0JzIxLjYiTiAxMDfCsDIyJzQzLjciRQ!5e0!3m2!1sen!2sph!4v1" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2026 Gladys Poultry Farm. All rights reserved.</p>
+      <p>Email: gladys_alboro@sjp2cd.edu.ph | Phone: 09988747646</p>
+    </div>
+  </footer>
+
+  <!-- Cart Modal -->
+  <div class="cart-modal-overlay">
+    <div class="cart-modal">
+      <div class="cart-modal-header">
+        <h2>Shopping Cart</h2>
+        <button class="close-modal" id="close-cart-modal">&times;</button>
+      </div>
+      <div class="cart-items"></div>
+      <div class="cart-modal-footer">
+        <div class="cart-total">Total: <span class="cart-total-amount">&#8369;0</span></div>
+        <button class="btn">Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="cart-notification"></div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

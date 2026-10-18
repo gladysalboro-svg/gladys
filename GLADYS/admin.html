@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Gladys Poultry Farm</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <div class="container navbar">
+      <div class="logo">
+        <span>&#128047;</span>
+        Gladys Poultry Farm
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="categories.html">Categories</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="admin.html" style="color:var(--primary)">Admin</a></li>
+          <li><a href="index.html#contact" class="btn btn-outline btn-sm">Contact</a></li>
+        </ul>
+        <button id="cart-btn" class="cart-icon" aria-label="Shopping Cart">&#128722;<span class="cart-count">0</span></button>
+        <button class="mobile-menu-btn" aria-label="Menu">&#9776;</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Admin Dashboard -->
+  <section class="admin-section">
+    <div class="container">
+      <div class="admin-header">
+        <h1>Admin Dashboard</h1>
+        <button class="btn" onclick="openAddModal()">+ Add Chicken</button>
+      </div>
+
+      <div class="admin-tabs">
+        <button class="admin-tab-btn active" data-tab="manage-products">Manage Listings</button>
+        <button class="admin-tab-btn" data-tab="add-product">Add / Edit</button>
+      </div>
+
+      <!-- Manage Listings Tab -->
+      <div id="manage-products" class="admin-tab-content active">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Breed</th>
+              <th>Age</th>
+              <th>Price</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="products-table">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+        <p style="text-align:center;margin-top:1rem;color:#666;" id="no-products-msg" style="display:none;">No listings yet. Add one using the tab above.</p>
+      </div>
+
+      <!-- Add / Edit Tab -->
+      <div id="add-product" class="admin-tab-content">
+        <div class="admin-form">
+          <h3 style="margin-bottom:1.5rem;color:var(--primary-dark);">Add / Edit Chicken Listing</h3>
+          <form id="product-form">
+            <input type="hidden" id="editing-index" value="-1">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Chicken Name</label>
+                <input type="text" id="prod-name" placeholder="e.g. Rhode Island Red Pullet" required>
+              </div>
+              <div class="form-group">
+                <label>Breed</label>
+                <input type="text" id="prod-breed" placeholder="e.g. Rhode Island Red" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Age</label>
+                <select id="prod-age" required>
+                  <option value="4 months">4 months</option>
+                  <option value="5 months">5 months</option>
+                  <option value="6 months">6 months</option>
+                  <option value="8 months">8 months</option>
+                  <option value="10 months">10 months</option>
+                  <option value="1 year">1 year</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Category</label>
+                <select id="prod-category" required>
+                  <option value="4-month">4-Month-Old Chickens (&#8369;100-200)</option>
+                  <option value="5-month">5-Month-Old Chickens (&#8369;250-350)</option>
+                  <option value="6-month-plus">6 Months &amp; Older (&#8369;400-500)</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Price (Pesos)</label>
+              <input type="number" id="prod-price" placeholder="e.g. 250" min="0" required>
+            </div>
+            <div class="form-group">
+              <label>Image URL</label>
+              <input type="text" id="prod-image" placeholder="images/chicken-1.jpg">
+              <small style="color:#666;font-size:0.85rem;">Leave blank to use default placeholder.</small>
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <textarea id="prod-description" rows="3" placeholder="Describe the chicken..." required></textarea>
+            </div>
+            <div class="form-group">
+              <label>Characteristics (comma separated)</label>
+              <textarea id="prod-characteristics" rows="2" placeholder="Brown egg layer, Hardy, Docile"></textarea>
+            </div>
+            <div class="form-group">
+              <label>Availability</label>
+              <select id="prod-availability">
+                <option value="available">Available</option>
+                <option value="unavailable">Unavailable</option>
+              </select>
+            </div>
+            <button type="submit" class="btn save-btn">Save Listing</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2026 Gladys Poultry Farm. All rights reserved.</p>
+      <p>Email: gladys_alboro@sjp2cd.edu.ph | Phone: 09988747646</p>
+    </div>
+  </footer>
+
+  <!-- Cart Modal -->
+  <div class="cart-modal-overlay">
+    <div class="cart-modal">
+      <div class="cart-modal-header">
+        <h2>Shopping Cart</h2>
+        <button class="close-modal" id="close-cart-modal">&times;</button>
+      </div>
+      <div class="cart-items"></div>
+      <div class="cart-modal-footer">
+        <div class="cart-total">Total: <span class="cart-total-amount">&#8369;0</span></div>
+        <button class="btn">Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="cart-notification"></div>
+
+  <!-- Add/Edit Modal -->
+  <div id="admin-add-modal" style="display:none;" class="cart-modal-overlay">
+    <div class="cart-modal" style="max-width:700px;">
+      <div class="cart-modal-header">
+        <h3 id="modal-title">Add Chicken</h3>
+        <button class="close-modal" onclick="document.getElementById('admin-add-modal').style.display='none'">&times;</button>
+      </div>
+      <div class="cart-items" style="padding:1.5rem;overflow:visible;">
+        <form id="product-form-modal">
+          <input type="hidden" id="editing-index-modal" value="-1">
+          <div class="form-group">
+            <label>Chicken Name</label>
+            <input type="text" id="prod-name-modal" placeholder="e.g. Rhode Island Red Pullet" required>
+          </div>
+          <div class="form-group">
+            <label>Breed</label>
+            <input type="text" id="prod-breed-modal" placeholder="e.g. Rhode Island Red" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Age</label>
+              <select id="prod-age-modal" required>
+                <option value="4 months">4 months</option>
+                <option value="5 months">5 months</option>
+                <option value="6 months">6 months</option>
+                <option value="8 months">8 months</option>
+                <option value="10 months">10 months</option>
+                <option value="1 year">1 year</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Category</label>
+              <select id="prod-category-modal" required>
+                <option value="4-month">4-Month-Old Chickens (&#8369;100-200)</option>
+                <option value="5-month">5-Month-Old Chickens (&#8369;250-350)</option>
+                <option value="6-month-plus">6 Months &amp; Older (&#8369;400-500)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Price (Pesos)</label>
+            <input type="number" id="prod-price-modal" placeholder="e.g. 250" min="0" required>
+          </div>
+          <div class="form-group">
+            <label>Image URL</label>
+            <input type="text" id="prod-image-modal" placeholder="images/chicken-1.jpg">
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea id="prod-description-modal" rows="3" placeholder="Describe the chicken..." required></textarea>
+          </div>
+          <div class="form-group">
+            <label>Characteristics (comma separated)</label>
+            <textarea id="prod-characteristics-modal" rows="2" placeholder="Brown egg layer, Hardy, Docile"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Availability</label>
+            <select id="prod-availability-modal">
+              <option value="available">Available</option>
+              <option value="unavailable">Unavailable</option>
+            </select>
+          </div>
+          <button type="submit" class="btn save-btn">Save Listing</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+  <script>
+    // Admin modal form wiring
+    const modalForm = document.getElementById("product-form-modal");
+    const editIndexInput = document.getElementById("editing-index-modal");
+
+    window.openAddModal = function () {
+      editIndexInput.value = -1;
+      document.getElementById("modal-title").textContent = "Add Chicken";
+      modalForm.reset();
+      document.getElementById("admin-add-modal").style.display = "flex";
+    };
+
+    window.openEditModal = function (index) {
+      const p = products[index];
+      editIndexInput.value = index;
+      document.getElementById("modal-title").textContent = "Edit Chicken";
+      document.getElementById("prod-name-modal").value = p.name;
+      document.getElementById("prod-breed-modal").value = p.breed;
+      document.getElementById("prod-age-modal").value = p.age;
+      document.getElementById("prod-category-modal").value = p.category;
+      document.getElementById("prod-price-modal").value = p.price;
+      document.getElementById("prod-image-modal").value = p.image;
+      document.getElementById("prod-description-modal").value = p.description;
+      document.getElementById("prod-characteristics-modal").value = p.characteristics.join(", ");
+      document.getElementById("prod-availability-modal").value = p.availability;
+      document.getElementById("admin-add-modal").style.display = "flex";
+    };
+
+    window.deleteProduct = function (index) {
+      if (!confirm("Delete this chicken listing?")) return;
+      products.splice(index, 1);
+      saveProducts();
+      renderAdmin();
+      renderProducts(".products-grid");
+      renderProducts(".featured-grid");
+    };
+
+    modalForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("prod-name-modal").value.trim();
+      const breed = document.getElementById("prod-breed-modal").value.trim();
+      const age = document.getElementById("prod-age-modal").value;
+      const category = document.getElementById("prod-category-modal").value;
+      const price = parseFloat(document.getElementById("prod-price-modal").value);
+      const description = document.getElementById("prod-description-modal").value.trim();
+      const characteristics = document.getElementById("prod-characteristics-modal").value.split(",").map(c => c.trim()).filter(Boolean);
+      const availability = document.getElementById("prod-availability-modal").value;
+      const image = document.getElementById("prod-image-modal").value.trim() || "images/chicken-default.png";
+
+      const idx = parseInt(editIndexInput.value);
+      const productData = {
+        id: idx >= 0 ? products[idx].id : Date.now(),
+        name, breed, age, category, price, description, characteristics, availability, image
+      };
+
+      if (idx >= 0) products[idx] = productData;
+      else products.push(productData);
+
+      saveProducts();
+      renderAdmin();
+      renderProducts(".products-grid");
+      renderProducts(".featured-grid");
+
+      document.getElementById("admin-add-modal").style.display = "none";
+      modalForm.reset();
+      editIndexInput.value = -1;
+    });
+
+    // Ensure products table renders
+    document.addEventListener("DOMContentLoaded", function () {
+      const tableBody = document.getElementById("products-table");
+      const noMsg = document.getElementById("no-products-msg");
+      if (products.length === 0) {
+        if (noMsg) noMsg.style.display = "block";
+      }
+      renderAdmin();
+    });
+  </script>
+</body>
+</html>
